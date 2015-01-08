@@ -1,0 +1,20 @@
+---
+layout: default
+---
+{% for class_hash in site.data.api %}
+
+{% assign class = class_hash[1] %}
+{% assign fields = class["contents"] %}
+
+<h2>{{ class["name"] }}</h2>
+<ul>
+{% for field in fields | sort: "field_name" %}
+{% if field[0] == "Field" %}
+<li>{{ field[1].ty }} {{ field[1].full_name | join:'_' }}</li>
+{% else %}
+<li>{{ field[2][0][1].ty }} {{ field[2][0][1].full_name | join:'_' }}</li>
+{% endif %}
+{% endfor %}
+</ul>
+{% endfor %}
+
